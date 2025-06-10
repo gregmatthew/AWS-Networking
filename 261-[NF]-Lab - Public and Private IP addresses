@@ -1,0 +1,65 @@
+AWS Lab: Public and Private IP Addresses
+Overview
+This lab focuses on understanding and troubleshooting public and private IP addresses within an AWS Virtual Private Cloud (VPC). The lab simulates a real-world scenario where a cloud support engineer at Amazon Web Services (AWS) assists a customer with a networking issue.
+Objectives
+Summarize and investigate a customer scenario involving AWS networking.
+Analyze the differences between public and private IP addresses.
+Develop a solution to the customer's networking issue.
+Summarize and describe findings (group activity).
+Duration
+Approximately 1 hour.
+Scenario
+You are a cloud support engineer at AWS. A customer from a Fortune 500 company reports a networking issue within their AWS infrastructure. They have one VPC with a CIDR range of 10.0.0.0/16, containing two Amazon EC2 instances (Instance A and Instance B) in the same subnet with identical configurations. However:
+Instance A cannot reach the internet.
+Instance B can reach the internet.
+The customer suspects an issue with the EC2 instance configurations and also inquires about using a public IP address range (e.g., 12.0.0.0/16) for a new VPC, asking if this would cause issues. The provided architecture includes a VPC, an internet gateway, and a public subnet hosting both instances.
+AWS Architecture
+VPC: CIDR range 10.0.0.0/16
+Components: Internet Gateway, Public Subnet with Instance A and Instance B.
+Note: The lab assumes the AWS architecture (route tables, internet gateway, subnets) is correctly configured, as one instance can access the internet.
+Tasks
+Task 1: Investigate the Customer's Environment
+Access the AWS Management Console.
+Choose Start Lab to launch the lab environment.
+Wait for the Lab status: ready message, then close the Start Lab panel.
+Open the AWS Management Console in a new browser tab.
+Navigate to the EC2 dashboard:
+Search for EC2 in the AWS Console or find it under Services > Compute.
+Select Instances from the left navigation menu to view the two EC2 instances.
+Record instance details:
+Select Instance A, go to the Networking tab, and note its Public and Private IPv4 addresses.
+Repeat for Instance B.
+Compare the IP addresses and note any differences (e.g., presence or absence of a public IP address for Instance A).
+Key Consideration:
+Private IP Addresses: Typically within ranges like 10.0.0.0/8, 172.16.0.0/12, or 192.168.0.0/16, used for internal communication within a VPC.
+Public IP Addresses: Routable on the internet, assigned dynamically or via Elastic IPs, required for internet access.
+Troubleshooting Insight: Instance A likely lacks a public IP address or proper routing, preventing internet access, while Instance B has a public IP and correct configuration.
+Task 2: Use SSH to Connect to an Amazon Linux EC2 Instance
+For Windows Users:
+From the lab instructions, select Details > Show to view credentials.
+Download the labsuser.ppk file (saved to the Downloads directory).
+Note the Public IP address of the instance.
+Download and install PuTTY if not already installed.
+Configure a PuTTY session to connect to the EC2 instance (refer to AWS documentation: Connect to your Linux instance using PuTTY).
+For macOS/Linux Users:
+Use an SSH utility to connect to the instance using the provided credentials and public IP address.
+Verify connectivity to the instance and test internet access (e.g., using ping or curl commands).
+Key Consideration:
+This task helps confirm whether the instance's networking configuration (e.g., security groups, network ACLs, or public IP assignment) is causing the issue.
+Task 3: Respond to the Customer (Group Activity)
+In groups of two:
+Person 1 (Cloud Support Engineer): Summarize findings and explain why Instance A cannot reach the internet (e.g., missing public IP or incorrect security group settings) and why Instance B can.
+Person 2 (Jess, the customer): Review the explanation and ask clarifying questions.
+Address the customer’s question about using a public IP range (e.g., 12.0.0.0/16) for a new VPC:
+Response: Using a public IP range for a VPC is not recommended. Public IP ranges are routable on the internet and owned by organizations or assigned by ISPs. Using them in a VPC can cause routing conflicts or connectivity issues, as AWS cannot control public IP ranges. Instead, use private IP ranges (e.g., 10.0.0.0/16) for VPCs to ensure proper isolation and routing.
+If a group activity is not feasible, one student should present findings to the class.
+
+Findings
+Issue with Instance A: Likely lacks a public IP address or has restrictive security group/network ACL settings, preventing internet access. Instance B has a public IP and proper configuration, allowing internet connectivity.
+Public vs. Private IP:
+Private IPs are used within the VPC for internal communication and are not routable on the internet.
+Public IPs are required for internet access and are typically assigned dynamically or as Elastic IPs.
+Customer’s Public IP Range Question: Using a public IP range like 12.0.0.0/16 for a VPC is incorrect and could lead to routing conflicts. AWS VPCs should use private IP ranges to ensure proper network isolation and functionality.
+Lab Completion
+End the lab by selecting End Lab and confirming with Yes.
+Close the confirmation panel.
