@@ -1,0 +1,75 @@
+# AWS Lab: Create Subnets in a VPC
+
+## Lab Overview
+This lab focuses on creating subnets and allocating IP addresses within an Amazon Virtual Private Cloud (VPC). The goal was to assist a customer in setting up a VPC with approximately 15,000 private IP addresses and a public subnet with at least 50 IP addresses.
+
+---
+
+## Objectives
+- Summarize the customer scenario.
+- Create an Amazon VPC with subnets and allocate IP addresses.
+- Familiarize with the AWS Management Console.
+- Develop a solution for the customer's networking issue.
+
+---
+
+## Customer Scenario
+A startup company requested assistance in setting up their first VPC on AWS. The customer needed:
+- A VPC with around 15,000 private IP addresses.
+- The VPC's IPv4 CIDR block to use a `192.x.x.x` range.
+- A public subnet with at least 50 IP addresses.
+
+---
+
+## Tasks Performed
+
+### Task 1: Investigate the Customer’s Needs
+1. **Understanding VPC Basics**:
+   - A VPC is a logically isolated virtual network in AWS.
+   - Resources within a VPC communicate via private IP addresses.
+   - Public subnets allow internet access, while private subnets require a NAT gateway for internet connectivity.
+
+2. **CIDR Block Selection**:
+   - Used RFC 1918 to determine private IP ranges.
+   - Calculated the CIDR block using a subnet calculator to accommodate 15,000 IP addresses.
+   - Chose `192.168.0.0/18` for the VPC (providing 16,379 IP addresses).
+   - Allocated `192.168.1.0/26` for the public subnet (providing 59 IP addresses).
+
+3. **VPC Creation**:
+   - Launched the VPC Wizard in the AWS Management Console.
+   - Selected **VPC with a Single Public Subnet**.
+   - Configured the VPC with the chosen CIDR blocks and named it "First VPC".
+   - Verified the VPC creation under **Your VPCs**.
+
+### Task 2: Group Activity (Simulated Customer Interaction)
+- Collaborated with a peer to simulate the customer (Brock) and cloud support engineer roles.
+- Walked through the VPC creation process, explaining each step to the "customer".
+
+---
+
+Below is an example of the completed VPC configuration:
+
+| Parameter               | Value               |
+|-------------------------|---------------------|
+| IPv4 CIDR Block         | `192.168.0.0/18`    |
+| VPC Name                | `First VPC`         |
+| Public Subnet CIDR      | `192.168.1.0/26`    |
+| Availability Zone       | No Preference       |
+| Subnet Name             | `Public subnet`     |
+
+---
+
+## Key Learnings
+- How to design a VPC with appropriate CIDR blocks to meet IP address requirements.
+- The difference between public and private subnets and their use cases.
+- Hands-on experience with the AWS Management Console and VPC Wizard.
+
+---
+
+## Conclusion
+This lab provided practical experience in creating and configuring a VPC on AWS. By addressing the customer's requirements, I gained a deeper understanding of subnetting, CIDR notation, and VPC architecture.
+
+**Lab Status**: Completed successfully.  
+**Time Taken**: Approximately 1 hour.
+
+---
