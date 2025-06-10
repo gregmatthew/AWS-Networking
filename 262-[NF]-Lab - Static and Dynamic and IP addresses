@@ -1,0 +1,234 @@
+AWS EC2 Static and Dynamic IP Lab
+
+This lab focuses on understanding and resolving IP address assignment issues in Amazon Web Services (AWS) EC2 instances. It simulates a real-world scenario where a customer faces issues with a dynamically assigned IP address and requires a static IP solution.
+
+Scenario
+
+As a cloud support engineer at AWS, I received a ticket from Bob, a Cloud Admin at a Fortune 500 company. The issue is that their EC2 instance, named "Public Instance," changes its IP address every time it is stopped and started, causing connectivity issues with dependent resources. The customer needs a static IP address to resolve this. The lab replicates this scenario, investigates the issue, and implements a solution using an Elastic IP (EIP).
+
+Objectives
+
+
+
+
+
+Summarize the customer scenario.
+
+
+
+Analyze the differences between static and dynamic IP addresses in EC2 instances.
+
+
+
+Assign a persistent (static) IP to an EC2 instance.
+
+
+
+Develop and summarize a solution to the customer's issue.
+
+Duration
+
+Total duration: 60 minutes.
+
+Lab Steps
+
+Task 1: Investigate the Customer's Environment
+
+
+
+
+
+Access the AWS Management Console:
+
+
+
+
+
+Start the lab and wait for the "Lab status: ready" message.
+
+
+
+Open the AWS Management Console and arrange the browser tabs for easy reference.
+
+
+
+Launch an EC2 Instance:
+
+
+
+
+
+Navigate to the EC2 dashboard via the AWS Console search bar or Services > Compute > EC2.
+
+
+
+Select Launch instances and configure the instance as follows:
+
+
+
+
+
+Step 1: Choose an AMI: Select Amazon Linux 2 AMI (HVM).
+
+
+
+Step 2: Choose an Instance Type: Select t3.micro.
+
+
+
+Step 3: Configure Instance Details:
+
+
+
+
+
+Network: Choose Lab VPC.
+
+
+
+Subnet: Choose Public Subnet 1.
+
+
+
+Auto-assign Public IP: Enable.
+
+
+
+Step 4: Add Storage: Keep defaults.
+
+
+
+Step 5: Add Tags: Add tag with Key=Name, Value=test instance.
+
+
+
+Step 6: Configure Security Group: Select existing security group Linux Instance SG.
+
+
+
+Step 7: Review and Launch: Use existing key pair vockey | RSA and launch the instance.
+
+
+
+Observe IP Behavior:
+
+
+
+
+
+Once the instance is running (status: 2/2 checks passed), note the Public IPv4 and Private IPv4 addresses in the Networking tab.
+
+
+
+Stop the instance, wait for the Stopped state, and observe the IP addresses again. The Public IPv4 address changes, indicating a dynamic IP assignment.
+
+
+
+Analyze the Issue:
+
+
+
+
+
+The customer's EC2 instance is configured with a dynamic public IP, which AWS assigns from a pool and changes upon stop/start actions.
+
+
+
+This explains why Bob's "Public Instance" IP changes, breaking dependent resources.
+
+Task 2: Implement a Static IP Solution
+
+
+
+
+
+Allocate an Elastic IP (EIP):
+
+
+
+
+
+From the EC2 dashboard, navigate to Network and Security > Elastic IPs.
+
+
+
+Select Allocate Elastic IP address, keep defaults, and allocate. Note the EIP address (e.g., 54.244.33.245).
+
+
+
+Associate the EIP with the EC2 Instance:
+
+
+
+
+
+Select the allocated EIP, go to Actions > Associate Elastic IP address.
+
+
+
+Choose resource type Instance, select test instance, and associate with the instance’s Private IP address.
+
+
+
+Verify the Solution:
+
+
+
+
+
+Return to the Instances page, select test instance, and check the Networking tab. The Public IPv4 address now matches the EIP.
+
+
+
+Stop and start the instance. Observe that the Public IPv4 address remains the same, confirming a static IP.
+
+Findings
+
+
+
+
+
+Dynamic vs. Static IPs:
+
+
+
+
+
+Dynamic IP: Assigned automatically by AWS when an instance is launched or started. It changes when the instance is stopped and started, as seen in the initial test instance setup.
+
+
+
+Static IP (EIP): A persistent public IP address allocated to an AWS account and associated with an instance. It remains unchanged across stop/start actions, solving the customer's issue.
+
+
+
+Solution Effectiveness:
+
+
+
+
+
+Associating an EIP with the EC2 instance resolved the issue by providing a static public IP.
+
+
+
+This ensures that dependent resources can consistently connect to the instance using the same IP address, even after stop/start operations.
+
+
+
+Customer Resolution:
+
+
+
+
+
+The lab successfully replicated Bob’s issue and demonstrated that the dynamic IP was the cause.
+
+
+
+By allocating and associating an EIP, the instance now has a persistent IP, meeting the customer’s requirement and preventing connectivity issues.
+
+Conclusion
+
+This lab provided hands-on experience with AWS EC2 networking, highlighting the differences between dynamic and static IP assignments. By troubleshooting and resolving the customer’s issue, I applied practical AWS skills, including instance configuration, IP management, and Elastic IP allocation. The solution ensures reliable connectivity for the customer’s infrastructure.
+
