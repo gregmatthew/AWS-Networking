@@ -1,0 +1,52 @@
+🧪 Lab: Networking Resources for a VPC (AWS)
+Lab Title: Creating Networking Resources in an Amazon Virtual Private Cloud (VPC)
+Duration: ~60 minutes
+Role: Cloud Support Engineer (AWS)
+
+🧭 Lab Objectives
+- Summarize and assess the customer scenario
+- Create a VPC with associated networking components:
+- Internet Gateway (IGW)
+- Route Table
+- Security Group
+- Network Access Control List (NACL)
+- EC2 instance
+- Confirm successful internet connectivity from the instance using ping
+
+📌 Scenario
+"Hello Cloud Support!
+I previously reached out to you regarding help setting up my VPC... All I need to do is ping! Can you please help me set up my VPC to where it has network connectivity and can ping? The architecture is below. Thanks!"
+— Brock, Startup Owner
+
+
+🔧 Key Configuration
+VPC & Subnet
+- VPC Name: Test VPC
+- CIDR: 192.168.0.0/18
+- Public Subnet: 192.168.1.0/26
+Internet Access
+- Created and attached Internet Gateway
+- Configured Route Table with:
+- Local route: 192.168.0.0/18 → local
+- IGW route: 0.0.0.0/0 → IGW
+- Associated the route table with Public Subnet
+Security
+- Network ACLs allowing all inbound/outbound traffic for the subnet
+- Security Group attached to the EC2 instance, allowing:
+- SSH (TCP 22)
+- HTTP (TCP 80)
+- HTTPS (TCP 443)
+- Outbound: All traffic to 0.0.0.0/0
+EC2 Instance
+- AMI: Amazon Linux 2023
+- Type: t3.micro
+- Subnet: Public Subnet
+- Auto-assign Public IP: Enabled
+- Security Group: Public Access SG
+- Verified connectivity using:
+ping google.com
+
+
+
+✅ Outcome
+The instance successfully pinged external addresses—validating correct setup of the VPC's networking components. Mission accomplished!
