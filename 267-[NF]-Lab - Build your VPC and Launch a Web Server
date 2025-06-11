@@ -1,0 +1,115 @@
+AWS VPC Lab - Build Your VPC and Launch a Web Server
+Overview
+This repository documents the completion of AWS Lab 267: Building a Virtual Private Cloud (VPC) and launching a web server within it. This hands-on lab demonstrates fundamental AWS networking concepts and EC2 instance deployment.
+Lab Objectives
+
+Create a custom VPC with public and private subnets
+Configure internet gateway and route tables
+Launch EC2 instances in both public and private subnets
+Set up security groups for web server access
+Deploy and configure a web server
+Understand VPC networking fundamentals
+
+Architecture Diagram
+┌─────────────────────────────────────────────────────────────┐
+│                        AWS VPC                              │
+│  ┌─────────────────────┐    ┌─────────────────────────────┐ │
+│  │   Public Subnet     │    │     Private Subnet          │ │
+│  │                     │    │                             │ │
+│  │  ┌─────────────┐    │    │   ┌─────────────────────┐   │ │
+│  │  │ Web Server  │    │    │   │   Database Server   │   │ │
+│  │  │   (EC2)     │    │    │   │      (EC2)          │   │ │
+│  │  └─────────────┘    │    │   └─────────────────────┘   │ │
+│  └─────────────────────┘    └─────────────────────────────┘ │
+│               │                                              │
+│  ┌─────────────────────┐                                    │
+│  │  Internet Gateway   │                                    │
+│  └─────────────────────┘                                    │
+└─────────────────────────────────────────────────────────────┘
+                        │
+                   ┌─────────┐
+                   │Internet │
+                   └─────────┘
+Implementation Steps
+1. VPC Creation
+
+Created custom VPC with CIDR block: 10.0.0.0/16
+Configured DNS resolution and DNS hostnames
+
+2. Subnet Configuration
+
+Public Subnet: 10.0.1.0/24 (Availability Zone: us-east-1a)
+Private Subnet: 10.0.2.0/24 (Availability Zone: us-east-1b)
+
+3. Internet Gateway Setup
+
+Created and attached Internet Gateway to VPC
+Configured route table for public subnet to route traffic through IGW
+
+4. Security Groups
+
+Web Server Security Group:
+
+Inbound: HTTP (80), HTTPS (443), SSH (22)
+Outbound: All traffic
+
+
+Database Security Group:
+
+Inbound: MySQL (3306) from Web Server Security Group
+Outbound: All traffic
+
+
+
+5. EC2 Instance Deployment
+
+Launched web server instance in public subnet
+Launched database server instance in private subnet
+Configured appropriate security groups and key pairs
+
+6. Web Server Configuration
+
+Installed and configured Apache HTTP Server
+Created custom index.html page
+Verified public accessibility
+
+Key Concepts Learned
+VPC Fundamentals
+
+Understanding of CIDR blocks and IP addressing
+Subnet design and availability zone placement
+Internet Gateway functionality and routing
+
+Security Best Practices
+
+Principle of least privilege in security group rules
+Network segmentation between public and private resources
+Proper inbound/outbound rule configuration
+
+EC2 Integration
+
+Instance placement within VPC subnets
+Security group assignment and management
+Public vs private IP addressing
+
+Testing and Validation
+
+✅ Web server accessible from internet via public IP
+✅ Database server isolated in private subnet
+✅ Security groups properly restricting access
+✅ Route tables directing traffic correctly
+
+Technologies Used
+
+AWS VPC: Virtual Private Cloud networking
+Amazon EC2: Elastic Compute Cloud instances
+Apache HTTP Server: Web server software
+AWS Security Groups: Virtual firewall rules
+Internet Gateway: VPC internet connectivity
+
+
+
+Implement NAT Gateway for private subnet internet access
+Add Application Load Balancer for high availability
+Configure VPC Flow Logs for network monitoring
+Explore VPC Peering and Transit Gateway connections
